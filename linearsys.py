@@ -30,8 +30,6 @@ class LinearSys():
             i += 1
             self.solver.step()
         
-        print(i)
-        print(sol.shape)
         return sol
         
 if __name__ == '__main__':
@@ -45,7 +43,6 @@ if __name__ == '__main__':
         for j in range(len(x2)):
             x0 = np.array([x1v[i, j], x2v[i, j]])
             xs = ls.solve(x0, 0, 100, 0.1)
-            print(f'i = {i}, j = {j}\n xs={xs}')
             plt.plot(xs[:, 0], xs[:, 1])
 
     plt.show()
