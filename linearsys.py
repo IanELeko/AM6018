@@ -19,7 +19,7 @@ class LinearSys():
             max_step=tStep
         )
     
-    def solve(self, x0, t0, tN, tStep):
+    def solve_tstep(self, x0, t0, tN, tStep):
         self.get_solver(x0, t0, tN, tStep)
 
         sol = np.zeros((int((tN - t0) / tStep) + 1, x0.shape[0]))
@@ -30,6 +30,16 @@ class LinearSys():
             i += 1
             self.solver.step()
         
+        return sol
+
+    def solve_nstep(self, x0, t0, tStep, nStep):
+        sol = self.solve_tstep( 
+            x0=x0, 
+            t0=t0, 
+            tN=t0 + tStep*nStep, 
+            tStep=tStep
+        )
+
         return sol
         
 if __name__ == '__main__':
