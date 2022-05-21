@@ -7,6 +7,9 @@ import tensorflow.keras.layers as layers
 import numpy as np
 import matplotlib.pyplot as plt
 
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
+
 ######################## SIMPLE TIME-SERIES ########################
 
 seq = [10, 20, 30, 40, 50, 60, 70, 80, 90]

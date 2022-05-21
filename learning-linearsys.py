@@ -24,7 +24,7 @@ ls = linearsys.LinearSys(np.array([[-2.28, 1.95], [-2.25, 1.48]]))
 x0 = np.array([1, 1])
 xs = ls.solve_nstep(x0=x0, t0=0, tStep=0.1, nStep=T_LEN)
 
-N_STEP = 50
+N_STEP = 5
 N_FEAT = 2
 X, y = split_sequence(xs, N_STEP)
 
@@ -35,9 +35,6 @@ x_init = X[0]
 model = keras.Sequential([
     layers.BatchNormalization(input_shape=(N_STEP, N_FEAT)),
     layers.LSTM(1024, activation='relu'),
-    layers.BatchNormalization(),
-    layers.Dense(512, activation='relu'),
-    layers.BatchNormalization(),
     layers.Dense(2)
 ])
 
