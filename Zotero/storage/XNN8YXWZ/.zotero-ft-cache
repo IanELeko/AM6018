@@ -1,0 +1,224 @@
+Figure 2 - available via license: CC BY
+Content may be subject to copyright.
+Download
+View publication
+(a) Simple scheme of a one-dimension (1D) convolutional operation. (b) Full representation of a 1D convolutional neural network for a SNP-matrix. The convolution outputs are represented in yellow. Pooling layers after convolutional operations combining the output of the previous layer at certain locations into a single neuron are represented in green. The final output is a standard MLP.
+(a) Simple scheme of a one-dimension (1D) convolutional operation. (b) Full representation of a 1D convolutional neural network for a SNP-matrix. The convolution outputs are represented in yellow. Pooling layers after convolutional operations combining the output of the previous layer at certain locations into a single neuron are represented in green. The final output is a standard MLP.
+Source publication
+Figure 1. Multi-Layer Perceptron (MLP) diagram with four hidden layers...
+Figure 2. (a) Simple scheme of a one-dimension (1D) convolutional...
+Figure 3. Scheme of recurrent neural networks (RNNs): The left part of...
+Figure 4. Scheme of generative adversarial networks (GANs). The...
++2 Figure 5. Correlations between observed and predicted phenotypes in the...
+A Guide for Using Deep Learning for Complex Trait Genomic Prediction
+Article
+Full-text available
+
+    Jul 2019 
+
+    Pérez-Enciso Pérez-Enciso
+    Laura Zingaretti Laura Zingaretti 
+
+Deep learning (DL) has emerged as a powerful tool to make accurate predictions from complex data such as image, text, or video. However, its ability to predict phenotypic values from molecular data is less well studied. Here, we describe the theoretical foundations of DL and provide a generic code that can be easily modified to suit specific needs....
+Cite
+Download full-text
+Contexts in source publication
+Context 1
+... CNNs is a special case of neural networks which uses convolution instead of a full matrix multiplication in the hidden layers [24]. A typical CNN is made up of dense, fully connected layers and "convolutional layers" ( Figure 2 b). In each convolutional layer, a convolutional operation is performed along the input of predefined width and strides. ...
+View in full-text
+Context 2
+... networks also have sparse interactions and are equivariant to translations. An illustration of a one-dimension (1D) convolution with a 3-K kernel size is depicted in Figure 2 a. Figure 2 b shows the steps involved in a convolutional network. ...
+View in full-text
+Context 3
+... illustration of a one-dimension (1D) convolution with a 3-K kernel size is depicted in Figure 2 a. Figure 2 b shows the steps involved in a convolutional network. Recurrent neural networks (RNN) are specifically designed to model space-temporal structures because RNNs consider information from multiple previous layers [24,25]. ...
+View in full-text
+Similar publications
+Figure 2: Graph representation of possible action result
+Figure 3: Graph representation of goal configuration
+Figure 5: Average rating vs. rating standard deviation of each...
+Combining Deep Learning and Qualitative Spatial Reasoning to Learn Complex Structures from Sparse Examples with Noise
+Article
+Full-text available
+
+    Jul 2019 
+
+    Nikhil Krishnaswamy Nikhil Krishnaswamy
+    Scott E. Friedman Scott E. Friedman
+    James Pustejovsky James Pustejovsky 
+
+Many modern machine learning approaches require vast amounts of training data to learn new concepts; conversely, human learning often requires few examples—sometimes only one—from which the learner can abstract structural concepts. We present a novel approach to introducing new spatial structures to an AI agent, combining deep learning over qualita...
+View
+Citations
+... The important DL models include multilayer perceptron (MLP), generative adversarial networks (GAN), convolutional neural network (CNN), and recurrent neural network (RNN) (LeCun et al. 2015). Deep CNNs primarily use DL architecture that have now attained state-of-the-art performance for crucial computer vision tasks; for instance, image classification, object recognition, and image segmentation (Pérez-Enciso and Zingaretti 2019) . ...
+... CNN is a special case of DL which uses fully connected layers known as convolutional layers. In each of the convolutional layers, the convolution operation is performed along with the inputs of predefined strides and width (Pérez-Enciso and Zingaretti 2019) . Finally, smoothing the results is performed along the pooling layer. ...
+A Comprehensive Review of High Throughput Phenotyping and Machine Learning for Plant Stress Phenotyping
+Article
+Full-text available
+
+    Apr 2022 
+
+    Taqdeer Gill
+    Simranveer K Gill
+    Yuvraj Chopra
+    Jason P De Koff
+    Karansher S. Sandhu Karansher S. Sandhu 
+
+During the last decade, there has been rapid adoption of ground and aerial platforms with multiple sensors for phenotyping various biotic and abiotic stresses throughout the developmental stages of the crop plant. High throughput phenotyping (HTP) involves the application of these tools to phenotype the plants and can vary from ground-based imaging to aerial phenotyping to remote sensing. Adoption of these HTP tools has tried to reduce the phenotyping bottleneck in breeding programs and help to increase the pace of genetic gain. More specifically, several root phenotyping tools are discussed to study the plant's hidden half and an area long neglected. However, the use of these HTP technologies produces big data sets that impede the inference from those datasets. Machine learning and deep learning provide an alternative opportunity for the extraction of useful information for making conclusions. These are interdisciplinary approaches for data analysis using probability, statistics, classification, regression, decision theory, data visualization, and neural networks to relate information extracted with the phenotypes obtained. These techniques use feature extraction, identification, classification, and prediction criteria to identify pertinent data for use in plant breeding and pathology activities. This review focuses on the recent findings where machine learning and deep learning approaches have been used for plant stress phenotyping with data being collected using various HTP platforms. We have provided a comprehensive overview of different machine learning and deep learning tools available with their potential advantages and pitfalls. Overall, this review provides an avenue for studying various HTP platforms with particular emphasis on using the machine learning and deep learning tools for drawing legitimate conclusions. Finally, we propose the conceptual challenges being faced and provide insights on future perspectives for managing those issues.
+View
+... The raw one-dimensional EEG signal (vector) x[n], where, n = 1, 2, …N, is given as an input to the first layer of the CNN architecture, i.e., conv1D (I), as shown in the Fig. 3. Here, N = 5000, and the layer utilizes filters/kernels to perform convolution operation with the input signal. Let k[n] denote the convolution kernel with size v, then the convolution output c[n] can be given as [49] : ...
+... where, '*' denotes the convolution operation. In general, the convolved feature at the output of l th layer can be written as [49] : ...
+... The window is moved across the feature map with a shift/stride. The operation of max pooling can be represented as [49] : ...
+One-dimensional convolutional neural network architecture for classification of mental tasks from electroencephalogram
+Article
+
+    Apr 2022
+    BIOMED SIGNAL PROCES 
+
+    Manali Saini Manali Saini
+    Udit Satija Udit Satija
+    Madhur Deo Upadhayay Madhur Deo Upadhayay 
+
+Cognitive/mental task classification using single/limited channel(s) electroencephalogram (EEG) signals in real-time play an important role in designing portable brain-computer interface (BCI) and neurofeedback (NFB) systems. However, real-time recorded EEG signals are often contaminated with ocular artifacts (OAs) and muscle artifacts (MAs), which deteriorate the hand-crafted features extracted from EEG signal, resulting inadequate classification of cognitive tasks. Therefore, we investigate the use of deep learning techniques which do not require manual feature extraction or artifact suppression. In this paper, we propose a shallow one-dimensional convolutional neural network (1D-CNN) architecture for cognitive task classification. The robustness of the proposed architecture is evaluated using artifact-free and artifact-contaminated EEG signals taken from two publicly available databases (i.e, Keirn and Aunon (K) database and EEGMAT (E) database) and in-house (R) database recorded using single-channel device in performing not only cognitive/non-cognitive binary task classification but also cognitive/cognitive multi-tasks classification. Evaluation results demonstrate that the proposed architecture achieves the highest subject-independent classification accuracy of 99.70% and 100.00% for multi-class classification and pair-wise classification respectively in database K. Further, subject-independent classification accuracies of 99.00% and 98.00% are achieved in databases E and R respectively. Comparative performance analysis demonstrates that the proposed architecture outperforms existing approaches not only in terms of classification accuracy but also in robustness against artifacts.
+View
+... For example, multi-trait ML and DL models increased the prediction accuracies for grain yield and grain protein content of wheat by 0-28.5% (Sandhu et al., 2021c). The superiority of machine learning to linear and non-linear methods are obvious across agricultural species but the benefits of deep learning are population and trait specific (Pérez-Enciso and Zingaretti, 2019; Montesinos-López et al., 2021), depending on number of loci controlling traits of interest, sample size, density of SNP data or characteristics of populations (Abdollahi-Arpanahi et al., 2020). To date, only single trait ML or DL models were used to predict disease resistance in carp (Palaiokostas, 2021) or striped catfish . ...
+Multivariate genomic prediction for commercial traits of economic importance in Banana shrimp Fenneropenaeus merguiensis
+Article
+
+    Apr 2022
+    AQUACULTURE 
+
+    Nguyen Hong Nguyen Nguyen Hong Nguyen
+    Nguyen Thanh Vu Nguyen Thanh Vu
+    Shruti S. Patil Shruti S. Patil
+    Karansher S. Sandhu Karansher S. Sandhu 
+
+Advantages of multi-trait machine and deep learning genomic prediction models for quantitative complex traits have not been documented or very limited in aquaculture species. Thus, the present study sought to understand effects of the multi-trait single-step genomic best linear unbiased prediction (ssGBLUP), Bayesian (BayesCpi), random forest (RF) and multilayer perceptron (MLP) models on genomic prediction accuracies for traits of commercial importance in banana white shrimp (Fenneropenaeus merguiensis). Our analyses were conducted in a breeding shrimp population comprising 562 individuals (offspring of 48 parental pairs) genotyped for 9472 single nucleotide polymorphisms (SNPs) and they had full phenotype records for five important traits (i.e., body weight, abdominal width, tail weight, raw colour of live shrimp and resistance to hepatopancreatic parvovirus). In both univariate and multi-trait analyses, machine (RF) and deep learning (MLP) models outperformed ssGBLUP for all traits studied. However, they had similar predictive performance to BayesCpi. The benefits of the multivariate relative to univariate models were trait- and method-specific. Multi-trait BayesCpi increased the prediction accuracies for growth (weight and width), carcass (tail weight) and HPV resistance by 9.3 to 17.8%. However, the multi-trait random forest models improved the predictive power for only abdominal width (14.3%) and disease resistance to hepatopancreatic parvovirus (10.0%). When the multi-trait MLP was used, the improvements in the prediction accuracies were observed for abdominal width and raw colour (4.9 and 6.0%, respectively). There were almost no differences in the predictive power between univariate and multi-trait ssGBLUP. Among the multi-trait models used, BayesCpi outperformed other methods (ssGBLUP, RF and MLP). It is concluded that either BayesCpi or machine and deep learning-based multi-trait genomic prediction models should be employed in large-scale genetic enhancement programs for banana shrimp. These approaches show enormous potential to enhance genetic progress made in this population of banana shrimp and potentially for other aquaculture species.
+View
+... Among the machine learning methods, deep learning (DL) methods received much attention due to their outstanding prediction properties (LeCun et al., 2015). Although improved accuracy can be questioned, many recent studies successfully applied deep learning for various genomic problems (Uppu et al., 2016;Bellot et al., 2018;Montesinos-López et al., 2018Crossa et al., 2019;Liu et al., 2019; Pérez-Enciso and Zingaretti, 2019) . ...
+NeuralLasso: Neural Networks Meet Lasso in Genomic Prediction
+Article
+Full-text available
+
+    Apr 2022 
+
+    Boby Mathew Boby Mathew
+    Andreas Hauptmann Andreas Hauptmann
+    Jens Léon Jens Léon
+    Mikko J. Sillanpää 
+
+Prediction of complex traits based on genome-wide marker information is of central importance for both animal and plant breeding. Numerous models have been proposed for the prediction of complex traits and still considerable effort has been given to improve the prediction accuracy of these models, because various genetics factors like additive, dominance and epistasis effects can influence of the prediction accuracy of such models. Recently machine learning (ML) methods have been widely applied for prediction in both animal and plant breeding programs. In this study, we propose a new algorithm for genomic prediction which is based on neural networks, but incorporates classical elements of LASSO. Our new method is able to account for the local epistasis (higher order interaction between the neighboring markers) in the prediction. We compare the prediction accuracy of our new method with the most commonly used prediction methods, such as BayesA, BayesB, Bayesian Lasso (BL), genomic BLUP and Elastic Net (EN) using the heterogenous stock mouse and rice field data sets.
+View
+... Many biologists have successfully applied it to several prediction problems including the gene expression inference [16,17], the functional annotation of genetic variants [18,19], phenotype identification from genetic variations [18][19][20][21][22], the recognition of protein folds [23,24], and the prediction of genome accessibility [25]. Pérez-Enciso and Zingaretti [26] provided a guide for using deep learning for complex trait genomic prediction. ...
+A Split-and-Merge Deep Learning Approach for Phenotype Prediction.
+Article
+
+    Mar 2022 
+
+    Wei-Heng Huang Wei-Heng Huang
+    Yu-Chung Wei Yu-Chung Wei 
+
+Background: Phenotype prediction with genome-wide markers is a critical but difficult problem in biomedical research due to many issues such as nonlinearity of the underlying genetic mapping and high-dimensionality of marker data. When using the deep learning method in the small-n-large-p data, some serious issues occur such as over-fitting, over-parameterization, and biased prediction. Methods: In this study, we propose a split-and-merge deep learning method, named SM-DL method, to learn a neural network on the dimension reduce data by using the split-and-merge technique. Conclusions: Numerically, the proposed method has significant performance in phenotype prediction for a simulated example. A real example is used to demonstrate how the proposed method can be applied in practice.
+View
+... These methods are characterized by the sequentially stacking (several) layers, which automatically identifies latent patterns or features from data (Trevisan et al., 2020). For a technically accurate and contextualized explanation of such models, refer to Pérez-Enciso and Zingaretti (2019) . This rising interest is fundamentally associated with the increasing availability of computational power (e.g., graphical processing unit computing, cloud computation, web servers); its success in diverse tasks (such as self-driving vehicles, object detection, and context recognition); ability to work on both regression and classification problems; and especially due to the lowerlevel restrictions compared to standard models. ...
+... Also, because neural networks do not need highly pre-processed inputs since these methods are powerful for working directly with raw data (e.g., images, text), and for this reason, they require less human intervention to process data, allowing us to scale machine learning in more interesting ways. For instance, neural networks can perform predictions without restrictive model assumptions; in the context of genetic studies, it does not require specifying the distribution of variables, priors, and the nature of genetic effects (additive, dominance, and epistasis), being theoretically capable of self-adjusting to the underlying genetic architecture (Pérez-Enciso and Zingaretti, 2019) . ...
+... Nevertheless, results are highly inconsistent on this matter (Bellot et al., 2018;Ma et al., 2018;Montesinos-López et al., 2018a,b;Azodi et al., 2019;Abdollahi-Arpanahi et al., 2020), and its best use and performance is still to be determined on a broader and most representative spectrum of prediction scenarios. In this context, one of the major challenges for applying this methodology is identifying adequate model structures and hyperparameters (Bellot et al., 2018; Pérez-Enciso and Zingaretti, 2019; van Dijk et al., 2021). Hereon, we refer to hyperparameter as those not learned with the machine learning algorithm but provided by the user before the learning process of the learnable parameters start, e.g., number of hidden layers, number of neurons per layer, learning rate, filter type, and number, activation function, optimization algorithm, regularization type, etc. ...
+Automated Machine Learning: A Case Study of Genomic “Image-Based” Prediction in Maize Hybrids
+Article
+Full-text available
+
+    Mar 2022 
+
+    Giovanni Galli Giovanni Galli
+    Felipe Sabadin Felipe Sabadin
+    Rafael Massahiro Yassue Rafael Massahiro Yassue
+    Cassia Galves Cassia Galves
+    Roberto Fritsche-Neto Roberto Fritsche-Neto 
+
+Machine learning methods such as multilayer perceptrons (MLP) and Convolutional Neural Networks (CNN) have emerged as promising methods for genomic prediction (GP). In this context, we assess the performance of MLP and CNN on regression and classification tasks in a case study with maize hybrids. The genomic information was provided to the MLP as a relationship matrix and to the CNN as “genomic images.” In the regression task, the machine learning models were compared along with GBLUP. Under the classification task, MLP and CNN were compared. In this case, the traits (plant height and grain yield) were discretized in such a way to create balanced (moderate selection intensity) and unbalanced (extreme selection intensity) datasets for further evaluations. An automatic hyperparameter search for MLP and CNN was performed, and the best models were reported. For both task types, several metrics were calculated under a validation scheme to assess the effect of the prediction method and other variables. Overall, MLP and CNN presented competitive results to GBLUP. Also, we bring new insights on automated machine learning for genomic prediction and its implications to plant breeding.
+View
+... Precision livestock farming (PLF) incorporates artificial intelligence technology to automatically monitor and manage animal production, predicts solutions for problems that may arise in the farm, and uses deep learning for genomic prediction (Banhazi et al., 2012; Pérez-Enciso and Zingaretti, 2019; Tullo et al., 2019). PLF assists large farms to be economically and environmentally sustainable; however, the cost of PLF still outweighs its efficiency for smallhold farmers (Hostiou et al., 2017;Carillo and Abeni, 2020). ...
+BUFFALO GENETICS AND GENOMICS
+Book
+Full-text available
+
+    Feb 2022 
+
+    Guohua Hua
+    Hamdy Abdel-Shafy Hamdy Abdel-Shafy
+    Tingxian Deng Tingxian Deng
+    Yang Zhou Yang Zhou
+    Wai Yee Low 
+
+The revolution of high-throughput genotyping technologies has opened the field of buffalo breeding to use omics information to increase the efficiency of selection, including but not limited to genomic prediction, genome-wide association studies, evolutionary biology, and functional genomics. These approaches are showed the potential to significantly alter our understanding of the genetic basis of economically important traits in buffalo and enable the scientists to draw a complete picture that previously had major gaps. The current research topic includes a collection of several publications covering diverse approaches and ideas, e.g., classical breeding, genomic prediction, candidate genes, and molecular characterization of different buffalo breeds. We wish to thank all the authors and reviewers for their valuable contributions to ensure high quality articles for this research topic and we hope this collection will be of interest to the research community.
+View
+... Finally, the ML approach that has gained the greatest relevance in recent years involves deep learning [93, 94] . Deep learning methods are based on neural networks, which are founded on several layers of "perceptrons" [95]. ...
+Genomic Prediction Methods Accounting for Nonadditive Genetic Effects
+Chapter
+
+    Jan 2022
+    Meth Mol Biol 
+
+    Luis Varona Luis Varona
+    Andred Legarra
+    Miguel A. Toro Miguel A. Toro
+    Zulma G. Vitezica Zulma G. Vitezica 
+
+The use of genomic information for prediction of future phenotypes or breeding values for the candidates to selection has become a standard over the last decade. However, most procedures for genomic prediction only consider the additive (or substitution) effects associated with polymorphic markers. Nevertheless, the implementation of models that consider nonadditive genetic variation may be interesting because they (1) may increase the ability of prediction, (2) can be used to define mate allocation procedures in plant and animal breeding schemes, and (3) can be used to benefit from nonadditive genetic variation in crossbreeding or purebred breeding schemes. This study reviews the available methods for incorporating nonadditive effects into genomic prediction procedures and their potential applications in predicting future phenotypic performance, mate allocation, and crossbred and purebred selection. Finally, a brief outline of some future research lines is also proposed.
+View
+... Several authors have applied CNN, MLP, and other machine learning models to plant phenotype prediction, but the quantity of data available in these studies was typically small when compared to the hundreds of thousands or even millions of data points used in more traditional CNN applications (e.g., image classification) (Montesinos-López et al. 2018 Pérez-Enciso and Zingaretti 2019; Zingaretti et al. 2020;Abdollahi-Arpanahi et al. 2020). Perhaps for this reason, phenotype prediction with CNNs has continued to rely on extensive feature engineering and factor reduction, and primarily used very shallow neural networks. ...
+Predicting phenotypes from genetic, environment, management, and historical data using CNNs
+Article
+Full-text available
+
+    Dec 2021
+    THEOR APPL GENET 
+
+    Jacob D. Washburn Jacob D. Washburn
+    Emre Cimen
+    Guillaume Ramstein Guillaume Ramstein
+    Timothy Reeves
+    Edward S. Buckler 
+
+Key Message Convolutional Neural Networks (CNNs) can perform similarly or better than standard genomic prediction methods when sufficient genetic, environmental, and management data are provided. Abstract Predicting phenotypes from genetic (G), environmental (E), and management (M) conditions is a long-standing challenge with implications to agriculture, medicine, and conservation. Most methods reduce the factors in a dataset (feature engineering) in a subjective and potentially oversimplified manner. Deep neural networks such as Multilayer Perceptrons (MPL) and Convolutional Neural Networks (CNN) can overcome this by allowing the data itself to determine which factors are most important. CNN models were developed for predicting agronomic yield from a combination of replicated trials and historical yield survey data. The results were more accurate than standard methods when tested on held-out G, E, and M data (r = 0.50 vs. r = 0.43), and performed slightly worse than standard methods when only G was held out (r = 0.74 vs. r = 0.80). Pre-training on historical data increased accuracy compared to trial data alone. Saliency map analysis indicated the CNN has “learned” to prioritize many factors of known agricultural importance.
+View
+... For both the regular genotype matrix-based and LD reduced genotype matrix-based models, we used random sampling to reduce computing time. Random sampling of markers has been noted to be a poor feature selection and not recommended (Pérez-Enciso & Zingaretti, 2019) . However, the accuracy of the models using random sampling was not statistically different from the parametric and nonparametric models and even had higher accuracy in some scenarios. ...
+Comparison of genomic selection models for exploring predictive ability of complex traits in breeding programs
+Article
+Full-text available
+
+    Nov 2021 
+
+    Lance F. Merrick Lance F. Merrick
+    Arron H. Carter Arron H. Carter 
+
+Traits with a complex unknown genetic architecture are common in breeding programs. However, they pose a challenge for selection due to a combination of complex environmental and pleiotropic effects that impede the ability to create mapping populations to characterize the trait's genetic basis. One such trait, seedling emergence of wheat (Triticum aestivum L.) from deep planting, presents a unique opportunity to explore the best method to use and implement genetic selection (GS) models to predict a complex trait. Seventeen GS models were compared using two training populations, consisting of 473 genotypes from a diverse association mapping panel phenotyped from 2015 to 2019 and the other training population consisting of 643 breeding lines phenotyped in 2015 and 2020 in Lind, WA, with 40,368 markers. There were only a few significant differences between GS models, with support vector machines reaching the highest accuracy of 0.56 in a single breeding line trial using cross-validations. However, the consistent moderate accuracy of the parametric models indicates little advantage of using nonparametric models within individual years, but the nonparametric models show a slight increase in accuracy when combing years for complex traits. There was an increase in accuracy using cross-validations from 0.40 to 0.41 using diversity panels lines to breeding lines. Overall, our study showed that breeders can accurately predict and implement GS for a complex trait by using nonparametric machine learning models within their own breeding programs with increased accuracy as they combine training populations over the years.
+View
+Show more
+Get access to 30 million figures
+Join ResearchGate to access over 30 million figures and 135+ million publications – all in one place.
+Join for free
+ResearchGate Logo
+or
+Discover by subject area
+
+    Recruit researchers
+    Join for free
+    Login
+
+App Store
+Company
+About us
+News
+Careers
+Support
+Help Center
+Business solutions
+Advertising
+Recruiting
+© 2008-2022 ResearchGate GmbH. All rights reserved.
+
+    Terms
+    Privacy
+    Copyright
+    Imprint 
+

@@ -1,0 +1,265 @@
+Figure 1 - available via license: CC BY
+Content may be subject to copyright.
+Download
+View publication
+Illustrations of vanilla 2D convolution. (a) When the input is a single h × w map, each kernel is k × k and the corresponding output is a 2D (h − k + 1) × (w − k + 1) map. (b) When the input is c numbers h × w maps, each kernel is k × k × c. Doing the same operation on each channel as in (a), getting c 2D maps and add them up. The outputs of two sub-graphs are 2D maps with the same size.
+Illustrations of vanilla 2D convolution. (a) When the input is a single h × w map, each kernel is k × k and the corresponding output is a 2D (h − k + 1) × (w − k + 1) map. (b) When the input is c numbers h × w maps, each kernel is k × k × c. Doing the same operation on each channel as in (a), getting c 2D maps and add them up. The outputs of two sub-graphs are 2D maps with the same size.
+Source publication
+Figure 1. Illustrations of vanilla 2D convolution. (a) When the input...
+Figure 5. General flow chart of the CNNs-based PolSAR images...
+Figure 12. Classification results of the whole map on the AIRSAR...
+Figure 13. Classification results overlaid with the ground truth map on...
++9 Figure 14. Classification results overlaid with the ground truth map on...
+PolSAR Image Classification with Lightweight 3D Convolutional Networks
+Article
+Full-text available
+
+    Jan 2020 
+
+    Hongwei Dong Hongwei Dong
+    Lamei Zhang Lamei Zhang
+    and Bin Zou and Bin Zou 
+
+Convolutional neural networks (CNNs) have become the state-of-the-art in optical image processing. Recently, CNNs have been used in polarimetric synthetic aperture radar (PolSAR) image classification and obtained promising results. Unlike optical images, the unique phase information of PolSAR data expresses the structure information of objects. Thi...
+Cite
+Download full-text
+Contexts in source publication
+Context 1
+... convolution is the choice of most CNNs, which can be used to extract the information from the input maps. The process of vanilla 2D convolution operation is shown in Figure 1 , from which one can see that the output of a 2D convolution is always two-dimensional, i.e., one feature map, for any size of inputs. Therefore, 2D convolution can only extract spatial information, and it is not conducive to process the data which has a relationship between channels by 2D convolutions. ...
+View in full-text
+Context 2
+... 3D convolution (C3D) can be seen as an intuitive extension of 2D convolutions and a dimension is added to extract more information [30]. As shown in Figure 1 , the process of vanilla 2D convolution can be expressed as ...
+View in full-text
+Context 3
+... process of C3D can be seen from Figure 2, where the extra depth dimension is added to the 2D convolution kernels. The difference between 2D and 3D convolutions can be seen by comparing Figure 1 b with Figure 2a. Similar to 2D convolutions to maintain the spatial size of the inputs, the size of the depth dimension is maintained through 3D convolutions. ...
+View in full-text
+Context 4
+... fact, the feature maps extracted by multiple convolution kernels can be regarded as many different kinds of features [41]. However, from the comparison of the two sub-graphs in Figure 1 , multiple groups of convolution kernels have brought about several times of parameters. Depthwise separable convolution [35] was proposed as an effective way to reduce the increasing of parameters in this case, which realized a very efficient replacement by decoupling the spatial and channel-wise operations of the vanilla 2D convolution. ...
+View in full-text
+Context 5
+... separable convolution [35] was proposed as an effective way to reduce the increasing of parameters in this case, which realized a very efficient replacement by decoupling the spatial and channel-wise operations of the vanilla 2D convolution. For an h × w × c input map, 2D convolution kernels with the size of k × k × c × c are required to produce the output with the size of h × w × c (performing the operation in Figure 1 b c times with zero-padding). However, the convolution kernels with the size of k × k × c × 1 + 1 × 1 × c × c are needed for depthwise separable convolution to achieve the same effect. ...
+View in full-text
+Context 6
+... widely-used PolSAR benchmark datasets are employed in the experiments: AIRSAR Flevoland, ESAR Oberpfaffenhofen, and EMISAR Foulum. Figures 8-10 show their Pauli maps and ground truth maps, respectively. ...
+View in full-text
+Context 7
+... is a full polarized airborne SAR operating in L and C bands with a resolution of 2m × 2m and mainly acquired and studied by Danish Center for Remote Sensing (DCRS). Figure 1 0 shows its Pauli RGB image and ground truth map. The size of this image is 1000 × 1750. ...
+View in full-text
+Context 8
+... size of this image is 1000 × 1750. The calibration of the terrains in Figure 1 0b refers to [46,47], and each pixel in the map is divided into seven categories: lake, buildings, forest, peas, winter rape, winter wheat, and beet. There are 431,088 image slices in this dataset. ...
+View in full-text
+Context 9
+... experiments of 3D-CNN are carried out to find a suitable value of training epoch. The experimental results are shown in Figure 1 1. One can see from the experimental results that the training accuracy tends to be stable after 100 iterations and the validation accuracy does not change much after 200 iterations. ...
+View in full-text
+Context 10
+... the experimental environment and settings described earlier, the classification results of different methods are shown in Figures 12-14, and the accuracies are listed in Tables 5-7, respectively. Generally, the proposed methods achieve better performance than the compared ones. ...
+View in full-text
+Context 11
+... the proposed methods achieve better performance than the compared ones. The experimental results on the AIRSAR Flevoland dataset can be seen from Table 5 and the classification results of the whole map are listed in Figure 1 2. The results in Table 5 prove that the proposed methods slightly improve the classification accuracy on this data set. ...
+View in full-text
+Context 12
+... shows that there is potential redundancy in C3D operations and the lightweight strategies can improve not only the computational efficiency but also the classification performance. Whole map classification results can be seen in Figure 1 2, it can be seen that the proposed methods have more powerful capabilities for distinguishing between forest and grass. In addition, apart from rapeseed and three types of wheat, the proposed methods are also effective for classifying beet and potatoes. ...
+View in full-text
+Context 13
+... experimental results on ESAR Oberpfaffenhofen can be seen from Table 6 and the classification results of the whole map are listed in Figure 1 3. On this data set, the analysis results are generally consistent with the previous ones. ...
+View in full-text
+Context 14
+... conclusions under different datasets also confirm the generalization performance of the proposed methods. The results overlaid with the ground truth map on ESAR Oberpfaffenhofen are shown in Figure 1 3, where it can be seen that serious confusions exist between built-up areas and woodlands for 2D models. This phenomenon has been weakened in 3D-CNN, and the proposed methods further alleviate this problem. ...
+View in full-text
+Context 15
+... addition, compared with other methods, the proposed methods have more complete and pure classification results for the open areas. The experimental results on the EMISAR Foulum can be seen from Table 7 and the classification results of the whole map are listed in Figure 1 4. Compared with the former two datasets, EMISAR Foulum data which contains quite complex terrain information is not so widely used. ...
+View in full-text
+Context 16
+... is worth pointing out that although the results of 3DDW-CNN is slightly lower than 3D-CNN, such a small performance degradation (about 0.03%) is acceptable under the premise of reducing computational complexity. One can see from Figure 1 4 that the following groups of objects are easy to be misclassified, including lake-peas, peas-winter wheat, buildings-forest. The proposed methods show competitive performance when generally solving the above problems, although the results of P3D-CNN for the lake is not very good. ...
+View in full-text
+Context 17
+... in convolution layers of the proposed and comparing methods are calculated. Then the comparison combining accuracy and complexity can be seen from Figure 1 5, in which the x-axis represents the value of convolution FLOPs, and the y-axis represents the overall accuracy. Four involved methods, i.e., CNN, two proposed ones, and 3D-CNN, are shown in the figure from the left to the right. ...
+View in full-text
+Similar publications
+FIGURE 1. The Schematic of high-quality object image reconstruction...
+FIGURE 2. Schematic diagram of the optical setup. BE, beam expander;...
+FIGURE 4. Qualitative analysis and comparison of simulation results of...
+FIGURE 5. Qualitative analysis and comparison of simulation results of...
++3 FIGURE 6. Reconstruction results at different resolutions and sampling...
+High-Quality Object Reconstruction From One-Dimensional Compressed Encrypted Signal Based on Multi-Network Mixed Learning
+Article
+Full-text available
+
+    Aug 2020 
+
+    Yuhui Li Yuhui Li
+    Jiaosheng Li Jiaosheng Li
+    Jun Li Jun Li 
+
+Conventional optical image encryption methods based on phase-shifting interferometry need at least two interferograms, and the storage or transmission of interferograms needs to occupy a lot of resources. At the same time, the low quality of reconstructed complex natural images has always been a main limiting factor in the application of optical im...
+View
+Citations
+... In addition, the OA obtained by the proposed network is also compared with those obtained by some deep learning networks used in the classification of land cover. The results obtained by Wishart DBN (W-DBN) and local spatial information [21], Wishart CAE (WCAE) [34], complex-valued CNN (CV-CNN) [25], depthwise separable convolution based multi-task CNN (DMCNN) [36], and 3D depthwise separable convolution based CNN (3DDW-CNN) [28] are shown in Table IV. It is obvious that the proposed network can achieve the higher OA than other networks. ...
+A Lightweight Complex-valued DeepLabv3+ for Semantic Segmentation of PolSAR Image
+Article
+Full-text available
+
+    Jan 2022
+    IEEE J-STARS 
+
+    Lingjuan Yu
+    Zhaoxin Zeng
+    Ao Liu
+    Xiaochun Xie
+    Wen Hong Wen Hong 
+
+Semantic image segmentation is one kind of end-to-end segmentation methods which can classify the target region pixel by pixel. As a classic semantic segmentation network in optical images, DeepLabv3+ can achieve a good segmentation performance. However, when this network is directly used in the semantic segmentation of polarimetric synthetic aperture radar (PolSAR) image, it is hard to obtain the ideal segmentation results. The reason is that it is easy to yield overfitting due to the small PolSAR dataset. In this paper, a lightweight complex-valued DeepLabv3+ (L-CV-DeepLabv3+) is proposed for semantic segmentation of PolSAR data. It has two significant advantages, when compared with the original DeepLabv3+. First, the proposed network with the simplified structure and parameters can be suitable for the small PolSAR data, and thus it can effectively avoid the overfitting. Second, the proposed complex-valued (CV) network can make full use of both amplitude and phase information of PolSAR data, which brings better segmentation performance than the real-valued (RV) network, and the related CV operations are strictly true in the mathematical sense. Experimental results about two Flevoland datasets and one San Francisco dataset show that the proposed network can obtain better overall average (OA), mean intersection over union (MIOU), and mean pixel accuracy (MPA) than the original DeepLabv3+ and some other RV semantic segmentation networks.
+View
+... The first architecture utilizing 3D convolution and 3D pooling layers for PolSAR image classification was introduced by Zhang et al. [3] and achieved a classification accuracy better than conventional 2D CNNs. Lightweight 3D convolutions introduced by Dong et al. [4] to reduce the redundancy of 3D convolutions and take advantage of their excellent ability in spatial-polarimetry feature extraction. Considerable attention has been focused on the CNN architecture evolution over the last few years for increasing the feature extraction ability. ...
+... CNN has proven to have an exemplary performance to fill the gaps in conventional machine learning algorithms. Inspired by the lightweight operations for CNNs in the Pol-SAR image classification field, in this paper, pseudo-3D(P3D) CNN introduced by [4] is used in the experiments to investigate the performance of the proposed curriculum learning algorithm. Lightweight P3D CNN was introduced to not only perform feature learning in both the spatial and polarimetric dimensions but also reduce network parameters and high computational costs of 3D CNNs [4], [15]. ...
+... Inspired by the lightweight operations for CNNs in the Pol-SAR image classification field, in this paper, pseudo-3D(P3D) CNN introduced by [4] is used in the experiments to investigate the performance of the proposed curriculum learning algorithm. Lightweight P3D CNN was introduced to not only perform feature learning in both the spatial and polarimetric dimensions but also reduce network parameters and high computational costs of 3D CNNs [4] , [15]. ...
+Deep Curriculum Learning for PolSAR Image Classification
+Conference Paper
+
+    Dec 2021 
+
+    Hamidreza Mousavi Hamidreza Mousavi
+    Maryam Imani
+    Hassan Ghassemian Hassan Ghassemian 
+
+Following the great success of curriculum learning in the area of machine learning, a novel deep curriculum learning method proposed in this paper, entitled DCL, particularly for the classification of fully polarimetric synthetic aperture radar (PolSAR) data. This method utilizes the entropy-alpha target decomposition method to estimate the degree of complexity of each PolSAR image patch before applying it to the convolutional neural network (CNN). Also, an accumulative mini-batch pacing function is used to introduce more difficult patches to CNN. Experiments on the widely used data set of AIRSAR Flevoland reveal that the proposed curriculum learning method can not only increase classification accuracy but also lead to faster training convergence.
+View
+... The first architecture utilizing 3D convolution and 3D pooling layers for PolSAR image classification was introduced by Zhang et al. [3] and achieved a classification accuracy better than conventional 2D CNNs. Lightweight 3D convolutions introduced by Dong et al. [4] to reduce the redundancy of 3D convolutions and take advantage of their excellent ability in spatial-polarimetry feature extraction. Considerable attention has been focused on the CNN architecture evolution over the last few years for increasing the feature extraction ability. ...
+... CNN has proven to have an exemplary performance to fill the gaps in conventional machine learning algorithms. Inspired by the lightweight operations for CNNs in the Pol-SAR image classification field, in this paper, pseudo-3D(P3D) CNN introduced by [4] is used in the experiments to investigate the performance of the proposed curriculum learning algorithm. Lightweight P3D CNN was introduced to not only perform feature learning in both the spatial and polarimetric dimensions but also reduce network parameters and high computational costs of 3D CNNs [4], [15]. ...
+... Inspired by the lightweight operations for CNNs in the Pol-SAR image classification field, in this paper, pseudo-3D(P3D) CNN introduced by [4] is used in the experiments to investigate the performance of the proposed curriculum learning algorithm. Lightweight P3D CNN was introduced to not only perform feature learning in both the spatial and polarimetric dimensions but also reduce network parameters and high computational costs of 3D CNNs [4] , [15]. ...
+Deep Curriculum Learning for PolSAR Image Classification
+Preprint
+Full-text available
+
+    Dec 2021 
+
+    Hamidreza Mousavi Hamidreza Mousavi
+    Maryam Imani Maryam Imani
+    Hassan Ghassemian Hassan Ghassemian 
+
+Following the great success of curriculum learning in the area of machine learning, a novel deep curriculum learning method proposed in this paper, entitled DCL, particularly for the classification of fully polarimetric synthetic aperture radar (PolSAR) data. This method utilizes the entropy-alpha target decomposition method to estimate the degree of complexity of each PolSAR image patch before applying it to the convolutional neural network (CNN). Also, an accumulative mini-batch pacing function is used to introduce more difficult patches to CNN.Experiments on the widely used data set of AIRSAR Flevoland reveal that the proposed curriculum learning method can not only increase classification accuracy but also lead to faster training convergence.
+View
+... Attempts have been made with meta-learning to classify objects and attributes such as Zero-Shot Learning and Generalized Zero-Shot Learning used to classify Caltech-UCSD-Birds (CUB) (Welinder et al., 2010), Oxford Flowers (FLO) (Nilsback & Zisserman, 2008), Animals with Attributes2 (AWA2) (Xian et al., 2018), and Sun Attributes (Patterson & Hays, 2012) databases, achieving optimal performance. Nevertheless, Few-shot learning achieved better accuracy on object detection and attributes classification, only a few attempts made in the scene recognition or the remote sensing using deep residual Conventional Neural Networks (3-D CNN), Neural networks (NN) , and a method for polarimetric synthetic aperture radar (PolSAR) (Dong, Zhang & Zou, 2020; Zhang et al., 2021;. Therefore, in this work we directed our research to scene classification using benchmark models and proposed models. ...
+Insights into few shot learning approaches for image scene classification
+Article
+Full-text available
+
+    Sep 2021 
+
+    Mohamed Soudy Mohamed Soudy
+    Yasmine Afify
+    Nagwa Badr 
+
+Image understanding and scene classification are keystone tasks in computer vision. The development of technologies and profusion of existing datasets open a wide room for improvement in the image classification and recognition research area. Notwithstanding the optimal performance of exiting machine learning models in image understanding and scene classification, there are still obstacles to overcome. All models are data-dependent that can only classify samples close to the training set. Moreover, these models require large data for training and learning. The first problem is solved by few-shot learning, which achieves optimal performance in object detection and classification but with a lack of eligible attention in the scene classification task. Motivated by these findings, in this paper, we introduce two models for few-shot learning in scene classification. In order to trace the behavior of those models, we also introduce two datasets (MiniSun; MiniPlaces) for image scene classification. Experimental results show that the proposed models outperform the benchmark approaches in respect of classification accuracy.
+View
+... In [47], a lightweight deep neural network model called S2FEF-CNN is proposed for hyperspectral image classification, which can achieve a comparable classification accuracy with significantly reduced parameters. To alleviate the problem of deep 3D-CNN with a huge number of parameters and too expensive calculation cost, a lightweight 3D-CNN framework was proposed in [48] for PolSAR image classification. The proposed framework in [48] introduced pseudo-3D and 3D-depthwise separable convolutions to reduce the redundancy of 3D convolutions. ...
+... To alleviate the problem of deep 3D-CNN with a huge number of parameters and too expensive calculation cost, a lightweight 3D-CNN framework was proposed in [48] for PolSAR image classification. The proposed framework in [48] introduced pseudo-3D and 3D-depthwise separable convolutions to reduce the redundancy of 3D convolutions. In [49], an efficient light-weight deep neural network is proposed based on dual-path architecture, which also address the issue that most networks for image research involve too many parameters and computational overheads. ...
+Semi-U-Net: A Lightweight Deep Neural Network for Subject-sensitive Hashing of HRRS Images
+Article
+Full-text available
+
+    Apr 2021 
+
+    Kaimeng Ding Kaimeng Ding
+    Shoubao Su
+    Nan Xu Nan Xu
+    Tingting Jiang 
+
+As a special case of perceptual hashing algorithm, subject-sensitive hashing can realize “subject-biased” integrity authentication of high resolution remote sensing (HRRS) images, which overcomes the deficiencies of existing integrity authentication technologies. However, the existing deep neural network for subject-sensitive hashing have disadvantages such as high model complexity and low computational efficiency. In this paper, we propose an efficient and lightweight deep neural network named Semi-U-net to achieve efficient subject-sensitive hashing. The proposed Semi-U-net realizes the lightweight of the network from three aspects: First, considering the general process of perceptual hashing, it adopts a semi-u-shaped structure, which simplify the model structure and prevent the model from extracting too much redundant information to enhance the robustness of the algorithm; Second, the number of model parameters and the computational cost are significantly reduced by using deep separable convolution in the entire asymmetric network; Third, the number of model parameters is further compressed by using the dropout layer several times. The experimental results show that the size of our Semi-U-Net model is only 5.38M, which is only 1/27 of MUM-net and 1/15 of MultiResUnet. The speed of the Semi-U-Net based subject-sensitive hashing algorithm is 88.6 FPS, which is 2.89 times faster than MultiResUnet based algorithm and 2.1 times faster than MUM-net Based Algorithm. FLOPs of Semi-U-net is only 1/28 of MUM-net and 1/16 of MultiResUnet.
+View
+... Recently, deep learning is emerging as a powerful leading component in image analysis. So far, restricted Boltzmann machines (RBMs) [7], [8], deep belief networks (DBNs) [9], [10], autoencoders (AEs) [11]- [14], convolutional neural networks (CNNs) [15]- [24] , and recurrent neural networks (RNNs) [25] have found their applications in PolSAR image classification and achieved considerable results. ...
+... Zhao et al. [23] proposed to use two similar dilated FCN frameworks in parallel with different convolutional kernels to extract more discriminate features of PolSAR images. Dong et al. [24] proposed to use lightweight 3-D CNNs to significantly reduce and improve computational efficiency, while achieving promising results compared with conventional CNN-based methods. ...
+Semi-supervised Classification for PolSAR Data with Multi-scale Evolving Weighted Graph Convolutional Network
+Article
+
+    Mar 2021
+    IEEE J-STARS 
+
+    Shijie Ren Shijie Ren
+    Feng Zhou Feng Zhou 
+
+Although deep learning-based methods have been successfully applied to polarimetric synthetic aperture radar (PolSAR) image classification tasks, most of the available techniques are not suitable to deal with PolSAR data on irregular domains, e.g. superpixel graphs, because they are naturally designed as grid-based architectures in Euclidean space. To overcome this limitation and achieve robust PolSAR image classification, this paper proposes the multi-scale evolving weighted graph convolutional network (MEWGCN), where weighted graphs based on superpixel technique and Wishart-derived distance are constructed to enable efficient handling of graphical PolSAR data representations. In this work, we derive a new architectural design named graph evolving module that combines pairwise latent feature similarity and kernel diffusion to refine the graph structure in each scale. Finally, we propose a graph integration module based on self-attention to perform robust hierarchical feature extraction and learn an optimal linear combination of various scales to exploit effective feature propagation on multiple graphs. We validate the superiority of proposed approach on classification performance with four real-measured datasets and demonstrate significant improvements compared to state-of-the-art methods. Additionally, the proposed method has shown strong generalization capacity across datasets with similar land covers.
+View
+... Recently, deep learning is emerging as a powerful leading component in image analysis. So far, restricted Boltzmann machines (RBMs) [7], [8], deep belief networks (DBNs) [9], [10], autoencoders (AEs) [11]- [14], convolutional neural networks (CNNs) [15]- [24] and recurrent neural networks (RNNs) [25] have found their applications in PolSAR image classification and achieved considerable results. ...
+... Zhao et al. [23] proposed to use two similar dilated FCN frameworks in parallel with different convolutional kernels to extract more discriminate features of PolSAR images. Dong et al. [24] proposed to use lightweight 3D CNNs to significantly reduce and improve computational efficiency, while achieving promising results compared with conventional CNN-based methods. ...
+... Then, in each scale, the dot product of feature map M (L) k ∈ R N×F and attention coefficients α (k) ∈ R N×1 is performed, so as to assign weights to the feature vector of each node. Afterwards, the dot products are summed up to realize adaptive feature fusion from all scales as shown in (24) . ...
+Semi-Supervised Classification for PolSAR Data With Multi-Scale Evolving Weighted Graph Convolutional Network
+Article
+
+    Mar 2021
+    IEEE J-STARS 
+
+    Shijie Ren 
+
+Although deep learning-based methods have been successfully applied to polarimetric synthetic aperture radar (PolSAR) image classification tasks, most of the available techniques are not suitable to deal with PolSAR data on irregular domains, e.g. superpixel graphs, because they are naturally designed as grid-based architectures in Euclidean space. To overcome this limitation and achieve robust PolSAR image classification, this paper proposes the multi-scale evolving weighted graph convolutional network (MEWGCN), where weighted graphs based on superpixel technique and Wishart-derived distance are constructed to enable efficient handling of graphical PolSAR data representations. In this work, we derive a new architectural design named graph evolving module that combines pairwise latent feature similarity and kernel diffusion to refine the graph structure in each scale. Finally, we propose a graph integration module based on self-attention to perform robust hierarchical feature extraction and learn an optimal linear combination of various scales to exploit effective feature propagation on multiple graphs. We validate the superiority of proposed approach on classification performance with four real-measured datasets and demonstrate significant improvements compared to state-of-the-art methods. Additionally, the proposed method has shown strong generalization capacity across datasets with similar land covers.
+View
+... proposed the combination of features learned from nonlinear manifold embedding and applying an FCN to input PolSAR images; the final classification was carried out in an ensemble approach by an SVM. In [81] , the authors focused on the computational efficiency of deep learning methods, proposing the use of lightweight 3D CNNs. They showed that a classification accuracy comparable to other CNN methods was achievable while significantly reducing the number of learned parameters and therefore gaining computational efficiency. ...
+Deep Learning Meets SAR: Concepts, Models, Pitfalls, and Perspectives
+Article
+
+    Feb 2021 
+
+    Xiaoxiang Zhu Xiaoxiang Zhu
+    Sina Montazeri Sina Montazeri
+    Mohsin Ali Mohsin Ali
+    Yuansheng Hua Yuansheng Hua
+    Richard Bamler Richard Bamler 
+
+Deep learning in remote sensing has become an international hype, but it is mostly limited to the evaluation of optical data. Although deep learning has been introduced in Synthetic Aperture Radar (SAR) data processing, despite successful first attempts, its huge potential remains locked. In this paper, we provide an introduction to the most relevant deep learning models and concepts, point out possible pitfalls by analyzing special characteristics of SAR data, review the state-of-the-art of deep learning applied to SAR in depth, summarize available benchmarks, and recommend some important future research directions. With this effort, we hope to stimulate more research in this interesting yet under-exploited research field and to pave the way for use of deep learning in big SAR data processing workflows.
+View
+... In a more recent work [80], He et al. proposed the combination of features learned from nonlinear manifold embedding and applying a fully convolutional network (FCN) on input PolSAR images; the final classification was carried out in an ensemble approach by SVM. In [81] , the authors focused on the computational efficiency of deep learning methods, proposing the use of lightweight 3D CNNs. They showed that classification accuracy comparable to other CNN methods was achievable while significantly reducing the number of learned parameters and therefore gaining computational efficiency. ...
+Deep Learning meets SAR
+Article
+
+    Jan 2021 
+
+    Xiao Xiang Zhu Xiao Xiang Zhu
+    Sina Montazeri Sina Montazeri
+    Mohsin Ali Mohsin Ali
+    Yansheng Hua
+    Richard Bamler Richard Bamler 
+
+View
+... What's more, CNN has been widely used in image processing applications, and achieved remarked application results [26]- [28]. In recently, the convolution network is used to process PolSAR data [29] - [31], which can not only extract the deep features, but also extract the spatial features of PolSAR data based on the convolution structure. However, traditional CNN usually has only one channel, for image processing problems, the original features of images usually contain feature information of different sizes. ...
+Three-Channel Convolutional Neural Network for Polarimetric SAR Images Classification
+Article
+Full-text available
+
+    Aug 2020
+    IEEE J-STARS 
+
+    Wenqiang Hua Wenqiang Hua
+    Wen Xie Wen Xie
+    Xiaomin Jin 
+
+Terrain classifications is an important topic in polarimetric synthetic aperture radar (PolSAR) image processing and interpretation. A novel PolSAR classification method based on three-channel convolutional neural network (Tc-CNN) is proposed and this method can effectively take the advantage of unlabeled samples to improve the performance of classification with a small number of labeled samples. Several strategies are included in the proposed method. (1) In order to take the advantage of unlabeled samples, a data enhancement method based on neighborhood nearest neighbor propagation (N3P) method is proposed to enlarge the number of labeled samples. (2) To increase the role of central pixel in CNN classification based on pixel, a spatial weighted method is proposed to increase the weight of central pixel features and weak the weight of other types of pixel features. (3) A specific deep model for PolSAR image classification (named as Tc-CNN) is proposed, which can obtain more scale and deep polarization information to improve the classification results. Experimental results show that the proposed method achieves a much better performance than existing classification methods when the number of labeled samples is few.
+View
+Show more
+Get access to 30 million figures
+Join ResearchGate to access over 30 million figures and 135+ million publications – all in one place.
+Join for free
+ResearchGate Logo
+or
+Discover by subject area
+
+    Recruit researchers
+    Join for free
+    Login
+
+App Store
+Company
+About us
+News
+Careers
+Support
+Help Center
+Business solutions
+Advertising
+Recruiting
+© 2008-2022 ResearchGate GmbH. All rights reserved.
+
+    Terms
+    Privacy
+    Copyright
+    Imprint 
+

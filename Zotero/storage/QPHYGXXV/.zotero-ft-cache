@@ -1,0 +1,553 @@
+
+Stack Overflow
+
+    About
+    Products
+    For Teams
+
+    Log in
+    Sign up
+
+2022 Developer Survey is open! Take survey .
+
+Join Stack Overflow to find the best answer to your technical question, help others answer theirs.
+Sign up with email Sign up Sign up with Google Sign up with GitHub Sign up with Facebook
+
+    Home
+        Public
+        Questions
+        Tags
+        Users
+        Companies
+        Collectives
+        Explore Collectives
+        Teams
+        Stack Overflow for Teams – Start collaborating and sharing organizational knowledge. Create a free Team Why Teams?
+
+How to get reproducible results in keras
+Ask Question
+Asked 6 years, 8 months ago
+Modified 7 months ago
+Viewed 48k times
+This question shows research effort; it is useful and clear
+95
+This question does not show any research effort; it is unclear or not useful
+31
+Bookmark this question.
+Show activity on this post.
+
+I get different results (test accuracy) every time I run the imdb_lstm.py example from Keras framework ( https://github.com/fchollet/keras/blob/master/examples/imdb_lstm.py ) The code contains np.random.seed(1337) in the top, before any keras imports. It should prevent it from generating different numbers for every run. What am I missing?
+
+UPDATE: How to repro:
+
+    Install Keras ( http://keras.io/ )
+    Execute https://github.com/fchollet/keras/blob/master/examples/imdb_lstm.py a few times. It will train the model and output test accuracy.
+    Expected result: Test accuracy is the same on every run.
+    Actual result: Test accuracy is different on every run.
+
+UPDATE2: I'm running it on Windows 8.1 with MinGW/msys, module versions:
+theano 0.7.0
+numpy 1.8.1
+scipy 0.14.0c1
+
+UPDATE3: I narrowed the problem down a bit. If I run the example with GPU (set theano flag device=gpu0) then I get different test accuracy every time, but if I run it on CPU then everything works as expected. My graphics card: NVIDIA GeForce GT 635)
+python numpy theano keras
+Share
+Improve this question
+Follow
+Follow this question to receive notifications
+edited Sep 15, 2015 at 18:04
+user avatar
+kqw
+19.4k 11 11 gold badges 64 64 silver badges 95 95 bronze badges
+asked Sep 6, 2015 at 2:41
+user avatar
+Pavel Surmenok Pavel Surmenok
+4,244 3 3 gold badges 28 28 silver badges 33 33 bronze badges
+10
+
+    I cannot replicate running the code on ubuntu 14.04
+    –  Padraic Cunningham
+    Sep 11, 2015 at 11:49
+    theano -> 0.6.0 , numpy -> '1.9.2' , scipy -> '0.15.1'
+    –  Padraic Cunningham
+    Sep 11, 2015 at 12:12
+    Maybe the problem is that I use Windows. numpy.random.uniform works fine, always produces same results.
+    –  Pavel Surmenok
+    Sep 12, 2015 at 1:25
+    4
+    Code for GPU must use SIMD -like instructions a lot. This may result in random generator being called in random order. Also GPU is rather an autonomous entity and it may use its own random generator. After all, it's not trivial to run any code you want on GPU.
+    –  u354356007
+    Sep 15, 2015 at 4:53
+    2
+    Which CUDA version did you use? Did you install cuDNN? The latter I believe makes some sacrifices for speed that results in non-deterministic behavior on gpu. (Should be slight, I think it has to do with atomic operations being calculated on the backrprop, but you wouldn't get the same value every time.)
+    –  o1lo01ol1o
+    Oct 16, 2015 at 22:50
+
+ |  Show 5 more comments
+12 Answers 12
+Sorted by: Reset to default
+This answer is useful
+72
+This answer is not useful
+Show activity on this post.
+
+You can find the answer at the Keras docs: https://keras.io/getting-started/faq/#how-can-i-obtain-reproducible-results-using-keras-during-development .
+
+In short, to be absolutely sure that you will get reproducible results with your python script on one computer's/laptop's CPU then you will have to do the following:
+
+    Set the PYTHONHASHSEED environment variable at a fixed value
+    Set the python built-in pseudo-random generator at a fixed value
+    Set the numpy pseudo-random generator at a fixed value
+    Set the tensorflow pseudo-random generator at a fixed value
+    Configure a new global tensorflow session
+
+Following the Keras link at the top, the source code I am using is the following:
+
+ # Seed value # Apparently you may use different seed values at each stage seed_value= 0 # 1. Set the `PYTHONHASHSEED` environment variable at a fixed value import os os.environ[ 'PYTHONHASHSEED' ]= str (seed_value) # 2. Set the `python` built-in pseudo-random generator at a fixed value import random random.seed(seed_value) # 3. Set the `numpy` pseudo-random generator at a fixed value import numpy as np np.random.seed(seed_value) # 4. Set the `tensorflow` pseudo-random generator at a fixed value import tensorflow as tf tf.random.set_seed(seed_value) # for later versions: # tf.compat.v1.set_random_seed(seed_value) # 5. Configure a new global `tensorflow` session from keras import backend as K session_conf = tf.ConfigProto(intra_op_parallelism_threads= 1 , inter_op_parallelism_threads= 1 ) sess = tf.Session(graph=tf.get_default_graph(), config=session_conf) K.set_session(sess) # for later versions: # session_conf = tf.compat.v1.ConfigProto(intra_op_parallelism_threads=1, inter_op_parallelism_threads=1) # sess = tf.compat.v1.Session(graph=tf.compat.v1.get_default_graph(), config=session_conf) # tf.compat.v1.keras.backend.set_session(sess)  
+
+It is needless to say that you do not have to to specify any seed or random_state at the numpy , scikit-learn or tensorflow / keras functions that you are using in your python script exactly because with the source code above we set globally their pseudo-random generators at a fixed value.
+Share
+Improve this answer
+Follow
+Follow this answer to receive notifications
+edited Feb 27, 2020 at 18:31
+answered Oct 19, 2018 at 17:23
+user avatar
+Outcast Outcast
+4,578 3 3 gold badges 36 36 silver badges 84 84 bronze badges
+3
+
+    2
+    For later versions of tensorflow, if you face an error, use tf.random.set_random_seed(seed_value)
+    –  Kalpit
+    Feb 4, 2020 at 9:32
+    Thanks, this worked for me! Just to be sure: Is there anything I need to do to "restore the randomness back to normal" after running the script? Or does setting the seed_values only have a "one-time effect"?
+    –  Frank
+    Jan 18, 2021 at 19:05
+    Hey @Frank, I think that it does not go back to normal if you set the seed values like that unless you restart the kernel etc (or set a different seed value by yourself etc).
+    –  Outcast
+    Jan 22, 2021 at 14:55
+
+Add a comment  | 
+This answer is useful
+13
+This answer is not useful
+Show activity on this post.
+
+Theano's documentation talks about the difficulties of seeding random variables and why they seed each graph instance with its own random number generator.
+
+    Sharing a random number generator between different {{{RandomOp}}} instances makes it difficult to producing the same stream regardless of other ops in graph, and to keep {{{RandomOps}}} isolated. Therefore, each {{{RandomOp}}} instance in a graph will have its very own random number generator. That random number generator is an input to the function. In typical usage, we will use the new features of function inputs ({{{value}}}, {{{update}}}) to pass and update the rng for each {{{RandomOp}}}. By passing RNGs as inputs, it is possible to use the normal methods of accessing function inputs to access each {{{RandomOp}}}’s rng. In this approach it there is no pre-existing mechanism to work with the combined random number state of an entire graph. So the proposal is to provide the missing functionality (the last three requirements) via auxiliary functions: {{{seed, getstate, setstate}}}.
+
+They also provide examples on how to seed all the random number generators.
+
+    You can also seed all of the random variables allocated by a RandomStreams object by that object’s seed method. This seed will be used to seed a temporary random number generator, that will in turn generate seeds for each of the random variables.
+
+ >>> srng.seed( 902340 ) # seeds rv_u and rv_n with different seeds each  
+
+Share
+Improve this answer
+Follow
+Follow this answer to receive notifications
+answered Sep 21, 2015 at 3:45
+user avatar
+PabTorre PabTorre
+2,656 19 19 silver badges 29 29 bronze badges
+1
+
+    11
+    But in order to seed them, we need to have access to theano's random objects that keras will use. Is it possible to do via keras API?
+    –  max
+    Nov 30, 2015 at 22:03
+
+Add a comment  | 
+This answer is useful
+12
+This answer is not useful
+Show activity on this post.
+
+I finally got reproducible results with my code. It's a combination of answers I saw around the web. The first thing is doing what @alex says:
+
+    Set numpy.random.seed ;
+    Use PYTHONHASHSEED=0 for Python 3.
+
+Then you have to solve the issue noted by @user2805751 regarding cuDNN by calling your Keras code with the following additional THEANO_FLAGS :
+
+    dnn.conv.algo_bwd_filter=deterministic,dnn.conv.algo_bwd_data=deterministic
+
+And finally, you have to patch your Theano installation as per this comment , which basically consists in:
+
+    replacing all calls to *_dev20 operator by its regular version in theano/sandbox/cuda/opt.py .
+
+This should get you the same results for the same seed.
+
+Note that there might be a slowdown. I saw a running time increase of about 10%.
+Share
+Improve this answer
+Follow
+Follow this answer to receive notifications
+answered Oct 20, 2016 at 10:05
+user avatar
+kepler kepler
+1,224 14 14 silver badges 17 17 bronze badges
+Add a comment  | 
+This answer is useful
+8
+This answer is not useful
+Show activity on this post.
+
+The problem is now solved in Tensorflow 2.0 ! I had the same issue with TF 1.x (see If Keras results are not reproducible, what's the best practice for comparing models and choosing hyper parameters? ) but
+
+ import os ####*IMPORANT*: Have to do this line *before* importing tensorflow os.environ[ 'PYTHONHASHSEED' ]= str ( 1 ) import tensorflow as tf import tensorflow.keras as keras import tensorflow.keras.layers import random import pandas as pd import numpy as np def reset_random_seeds (): os.environ[ 'PYTHONHASHSEED' ]= str ( 1 ) tf.random.set_seed( 1 ) np.random.seed( 1 ) random.seed( 1 ) #make some random data reset_random_seeds() NUM_ROWS = 1000 NUM_FEATURES = 10 random_data = np.random.normal(size=(NUM_ROWS, NUM_FEATURES)) df = pd.DataFrame(data=random_data, columns=[ 'x_' + str (ii) for ii in range (NUM_FEATURES)]) y = df. sum (axis= 1 ) + np.random.normal(size=(NUM_ROWS)) def run ( x, y ): reset_random_seeds() model = keras.Sequential([ keras.layers.Dense( 40 , input_dim=df.shape[ 1 ], activation= 'relu' ), keras.layers.Dense( 20 , activation= 'relu' ), keras.layers.Dense( 10 , activation= 'relu' ), keras.layers.Dense( 1 , activation= 'linear' ) ]) NUM_EPOCHS = 500 model. compile (optimizer= 'adam' , loss= 'mean_squared_error' ) model.fit(x, y, epochs=NUM_EPOCHS, verbose= 0 ) predictions = model.predict(x).flatten() loss = model.evaluate(x, y) #This prints out the loss by side-effect #With Tensorflow 2.0 this is now reproducible! run(df, y) run(df, y) run(df, y)  
+
+Share
+Improve this answer
+Follow
+Follow this answer to receive notifications
+answered Nov 27, 2019 at 18:03
+user avatar
+user2543623 user2543623
+1,212 1 1 gold badge 14 14 silver badges 23 23 bronze badges
+Add a comment  | 
+This answer is useful
+6
+This answer is not useful
+Show activity on this post.
+
+In Tensorflow 2.0 you can set random seed like this :
+
+ import tensorflow as tf tf.random.set_seed( 221 ) from tensorflow import keras from tensorflow.keras import layers model = keras.Sequential( [ layers.Dense( 2 ,name = 'one' ), layers.Dense( 3 ,activation = 'sigmoid' , name = 'two' ), layers.Dense( 2 ,name = 'three' )]) x = tf.random.uniform(( 12 , 12 )) model(x)  
+
+Share
+Improve this answer
+Follow
+Follow this answer to receive notifications
+answered Jun 17, 2020 at 14:19
+user avatar
+Aaditya Ura Aaditya Ura
+10.6k 7 7 gold badges 44 44 silver badges 70 70 bronze badges
+Add a comment  | 
+This answer is useful
+4
+This answer is not useful
+Show activity on this post.
+
+This works for me:
+
+ SEED = 123456 import os import random as rn import numpy as np from tensorflow import set_random_seed os.environ[ 'PYTHONHASHSEED' ]= str (SEED) np.random.seed(SEED) set_random_seed(SEED) rn.seed(SEED)  
+
+Share
+Improve this answer
+Follow
+Follow this answer to receive notifications
+answered Jun 14, 2019 at 23:40
+user avatar
+Victor Villacorta Victor Villacorta
+461 4 4 silver badges 5 5 bronze badges
+Add a comment  | 
+This answer is useful
+2
+This answer is not useful
+Show activity on this post.
+
+I would like to add something to the previous answers. If you use python 3 and you want to get reproducible results for every run, you have to
+
+    set numpy.random.seed in the beginning of your code
+    give PYTHONHASHSEED=0 as a parameter to the python interpreter
+
+Share
+Improve this answer
+Follow
+Follow this answer to receive notifications
+answered Aug 15, 2016 at 6:57
+user avatar
+Alex Alex
+708 1 1 gold badge 8 8 silver badges 16 16 bronze badges
+0
+Add a comment  | 
+This answer is useful
+2
+This answer is not useful
+Show activity on this post.
+
+I have trained and tested Sequential() kind of neural networks using Keras. I performed non linear regression on noisy speech data. I used the following code to generate random seed :
+
+ import numpy as np seed = 7 np.random.seed(seed)  
+
+I get the exact same results of val_loss each time I train and test on the same data.
+Share
+Improve this answer
+Follow
+Follow this answer to receive notifications
+edited Mar 13, 2017 at 5:06
+user avatar
+Autonomous
+8,635 1 1 gold badge 34 34 silver badges 74 74 bronze badges
+answered Jul 14, 2016 at 10:17
+user avatar
+tauseef_CuriousGuy tauseef_CuriousGuy
+720 1 1 gold badge 11 11 silver badges 26 26 bronze badges
+3
+
+    1
+    Have you used GPU? What backend: Theano or TensorFlow?
+    –  Pavel Surmenok
+    Sep 23, 2016 at 16:11
+    I used CPU with Theano backend.
+    –  tauseef_CuriousGuy
+    Sep 23, 2016 at 16:31
+    1
+    Got it. CPU works fine for me too. I have issues only when running on GPU.
+    –  Pavel Surmenok
+    Sep 23, 2016 at 20:35
+
+Add a comment  | 
+This answer is useful
+2
+This answer is not useful
+Show activity on this post.
+
+It is easier that it seems. Putting only this, it works:
+
+ import numpy as np import tensorflow as tf import random as python_random def reset_seeds (): np.random.seed( 123 ) python_random.seed( 123 ) tf.random.set_seed( 1234 ) reset_seeds()  
+
+The KEY of the question, VERY IMPORTANT, is to call the function reset_seeds() every time before running the model. Doing that you will obtain reproducible results as I check in the Google Collab.
+Share
+Improve this answer
+Follow
+Follow this answer to receive notifications
+answered Nov 18, 2020 at 14:55
+user avatar
+Oscar Monge Oscar Monge
+31 1 1 bronze badge
+1
+
+    This approach almost worked for me. I had to add os.environ["PYTHONHASHSEED"] = str(seed_value) to the beginning of the function body and then it worked.
+    –  michen00
+    Oct 14, 2021 at 7:46
+
+Add a comment  | 
+This answer is useful
+0
+This answer is not useful
+Show activity on this post.
+
+I agree with the previous comment, but reproducible results sometimes needs the same environment(e.g. installed packages, machine characteristics and so on). So that, I recommend to copy your environment to other place in case to have reproducible results. Try to use one of the next technologies:
+
+    Docker . If you have a Linux this very easy to move your environment to other place. Also you can try to use DockerHub .
+    Binder . This is a cloud platform for reproducing scientific experiments.
+    Everware . This is yet another cloud platform for "reusable science". See the project repository on Github.
+
+Share
+Improve this answer
+Follow
+Follow this answer to receive notifications
+answered Apr 27, 2016 at 11:44
+user avatar
+Yelaman Yelaman
+1,473 1 1 gold badge 11 11 silver badges 10 10 bronze badges
+1
+
+    My problem is that I can't get reproducible results even on the same environment when I run the training twice.
+    –  Pavel Surmenok
+    Sep 23, 2016 at 16:12
+
+Add a comment  | 
+This answer is useful
+0
+This answer is not useful
+Show activity on this post.
+
+The Conference Paper: Non-Random Weight Initialisation in Deep Learning Networks for Repeatable Determinism, publication date Jun 5, 2019 presented at 10th IEEE International Conference Dependable Systems, Services and Technologies (DESSERT-19) at Leeds Beckett University (LBU), United Kingdom, UK, Ireland and the Ukrainian section of IEEE June 5-7, 2019
+
+https://ieeexplore.ieee.org/document/8770007
+
+shows how to get repeatable results by enforcing critical regions of code.
+
+it has been extended to a Journal Paper: Repeatable Determinism using Non-Random Weight Initialisations in Smart City Applications of Deep Learning publication in The Journal of Reliable Intelligent Environments in a Smart Cities special edition, and uses glorot xavier limts and achieve the same accuracy with perceptron layers but grow the weight in to a linear order which may have an advantage for rule extraction in perceptron layers.
+Share
+Improve this answer
+Follow
+Follow this answer to receive notifications
+answered Jan 11, 2020 at 13:33
+user avatar
+Richard Rudd-Orthner Richard Rudd-Orthner
+1
+0
+Add a comment  | 
+This answer is useful
+0
+This answer is not useful
+Show activity on this post.
+
+Unlike what has been said before, only Tensorflow seed has an effect on random generation of weights (latest version Tensorflow 2.6.0 and Keras 2.6.0)
+
+Here is a small test you can run to check the influence of each seed (with np being numpy, tf being tensorflow and random the Python random library):
+
+ # Testing how seeds influence results # ----------------------------------- print ( "Seed specification" ) my_seed = 36 # To vary python hash, numpy random, python random and tensorflow random seeds a, b, c, d = 0 , 0 , 0 , 0 os.environ[ 'PYTHONHASHSEED' ] = str (my_seed+a) # Has no effect np.random.seed(my_seed+b) # Has no effect random.seed(my_seed+c) # Has no effect tf.random.set_seed(my_seed+d) # Has an effect print ( "Making ML model" ) keras.mixed_precision.set_global_policy( 'float64' ) model = keras.Sequential([ layers.Dense( 2 , input_shape=input_shape), #, activation='relu'), layers.Dense(output_nb, activation= None ), ]) # weights_save = model.get_weights() print ( "Some weights:" , weights_save[ 0 ].flatten())  
+
+We notice that variables a , b , c have no effect on the results. Only d has an effect on the results.
+
+So, in the latest versions of Tensorflow, only tensorflow random seed has an influence on the random choice of weights.
+Share
+Improve this answer
+Follow
+Follow this answer to receive notifications
+answered Oct 18, 2021 at 13:20
+user avatar
+Taha Taha
+689 4 4 silver badges 9 9 bronze badges
+Add a comment  | 
+Your Answer
+
+Draft saved
+Draft discarded
+Sign up or log in
+Sign up using Google
+Sign up using Facebook
+Sign up using Email and Password
+Submit
+Post as a guest
+Name
+Email
+
+Required, but never shown
+Post as a guest
+Name
+Email
+
+Required, but never shown
+Post Your Answer Discard
+
+By clicking “Post Your Answer”, you agree to our terms of service , privacy policy and cookie policy
+Not the answer you're looking for? Browse other questions tagged python numpy theano keras or ask your own question .
+
+    The Overflow Blog
+    Crystal balls and clairvoyance: Future proofing in a world of inevitable change
+    Make your open-source project public before you’re ready (Ep. 444)
+    Featured on Meta
+    Announcing the arrival of Valued Associate #1214: Dalmarus
+    Staging Ground: Reviewer Motivation, Scaling, and Open Questions
+    Retiring Our Community-Specific Closure Reasons for Server Fault and Super User
+    Temporarily pausing the site satisfaction survey
+
+Linked
+0
+How can I define the initial weights used by an autoencoder?
+0
+Different validation accuracy in different training sessions in keras
+16
+How to get reproducible result when running Keras with Tensorflow backend
+12
+Reproducible results using Keras with TensorFlow backend
+10
+Results not reproducible with Keras and TensorFlow in Python
+4
+If Keras results are not reproducible, what's the best practice for comparing models and choosing hyper parameters?
+5
+Tensorflow: Different results with the same random seed
+9
+Which seeds have to be set where to realize 100% reproducibility of training results in tensorflow?
+7
+Same code, very different accuracy on windows/ubuntu (Keras/Tensorflow)
+3
+Tensorflow-Keras reproducibility problem on Google Colab
+See more linked questions
+Related
+6273
+How do I merge two dictionaries in a single expression (take union of dictionaries)?
+6625
+How do I check whether a file exists without exceptions?
+5673
+How do I execute a program or call a system command?
+5186
+How can I safely create a nested directory?
+3531
+How do I get the current time?
+2498
+How do I get a substring of a string in Python?
+2570
+How do I get the last element of a list?
+4627
+How to make a flat list out of a list of lists
+2174
+How do I get the number of elements in a list in Python?
+3467
+How do I list all files of a directory?
+Hot Network Questions
+
+    how to power motors correctly on raspberry pi pico
+    Partitioning a list based on a criterion for sublists
+    What does Gandalf the White mean by his strange speech about Boromir?
+    Using complex impedance
+    Blinds Side Mount Bracket Ripped out of Top Window Frame. Drywall too damage to reattach without reinforcing. Help
+    What is the difference between "hallmark" and "trappings"?
+    Creating nested hex grids in QGIS
+    Is it appropriate to discuss authorship while proposing collaboration?
+    Faster computation of p-adic log
+    How do you gag a fish-person without tape?
+    Rewriting math proof from a paywalled paper then posting it to website for free
+    Story about a man who bets his head but not his neck with the devil
+    Does a volume stay constant when freely falling?
+    PVP-iodine and octenidine can stain skin purple, does the reaction create iodine radicals?
+    What's the easiest way to evenly distribute a mesh around a circle/cylinder mesh?
+    Game in James Bond film "From Russia with love"
+    gcov produces different results on Clang and GCC
+    NeumannValue is producing incorrect results
+    Why does Bender say "Please insert girder"?
+    How can I create a hexagonal structure with Geometry Nodes?
+    How is the word "kilohm" pronounced traditionally?
+    Is the sum of two singular covariance matrices also singular?
+    What is the big modified Mon Calamari cruiser in RotJ?
+    Is this single transistor interface good enough for this relay-control?
+
+Question feed
+Subscribe to RSS
+Question feed
+
+To subscribe to this RSS feed, copy and paste this URL into your RSS reader.
+lang-py
+Stack Overflow
+
+    Questions
+    Help
+
+Products
+
+    Teams
+    Advertising
+    Collectives
+    Talent
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Terms of Service
+    Contact Us
+    Cookie Settings
+    Cookie Policy
+
+Stack Exchange Network
+
+    Technology
+    Culture & recreation
+    Life & arts
+    Science
+    Professional
+    Business
+    API
+    Data
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+    Instagram
+
+Site design / logo © 2022 Stack Exchange Inc; user contributions licensed under cc by-sa . rev 2022.5.20.42186
+ 
+ 
