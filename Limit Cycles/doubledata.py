@@ -38,17 +38,6 @@ data4 = lc4.solve_nstep(
 )
 
 
-
-#plt.plot(data1[:-1, 0], data1[:-1, 1], 'r--')
-#plt.plot(data2[:-1, 0], data2[:-1, 1], 'b--')
-#plt.xlim(-4, 4)
-#plt.ylim(-4, 4)
-#plt.show()
-
-#data = np.concatenate((data1, data2), axis=0)
-
-#data = tf.random.shuffle(tf.constant(data))
-
 seqlen = 50
 tsdata1 = tf.keras.utils.timeseries_dataset_from_array(
     data=data1[:-1], 
@@ -68,8 +57,8 @@ model = tf.keras.Sequential([
         32, 
         activation='tanh', 
         input_shape=(seqlen, 2),
-        kernel_initializer=tf.keras.initializers.Identity(),
-        recurrent_initializer=tf.keras.initializers.Identity()
+        kernel_initializer=tf.keras.initializers.Identity(5),
+        recurrent_initializer=tf.keras.initializers.Identity(5)
     ),
     tf.keras.layers.Dense(2)
 ])
@@ -115,8 +104,8 @@ for i in range(SEQ_LEN, PRED_LEN):
     yhat4 = model.predict(xshat4_point, verbose=0)
     xshat4[i, :] = yhat4
 
-plt.plot(data1[:, 0], data1[:, 1], 'y')
-plt.plot(data2[:, 0], data2[:, 1], 'k')
+plt.plot(data1[:-1, 0], data1[:-1, 1], 'k')
+plt.plot(data2[:-1, 0], data2[:-1, 1], 'k')
 plt.plot(xshat1[:, 0], xshat1[:, 1], 'r--')
 plt.plot(xshat2[:, 0], xshat2[:, 1], 'b--')
 plt.plot(xshat4[:, 0], xshat4[:, 1], 'g--')
