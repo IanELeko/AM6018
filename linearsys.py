@@ -33,10 +33,11 @@ class LinearSys():
         return sol
 
     def solve_nstep(self, x0, t0, tStep, nStep):
+        print(t0 + np.floor(tStep*nStep))
         sol = self.solve_tstep( 
             x0=x0, 
             t0=t0, 
-            tN=t0 + tStep*nStep, 
+            tN=t0 + np.floor(tStep*nStep), 
             tStep=tStep
         )
 

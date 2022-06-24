@@ -10,7 +10,7 @@ class SimpleLimitCycle():
     
     def odefun(self, t, x):
         assert(len(x) == 2)
-        x1, x2 = x[0], x[1]
+        x1, x2 = x[0] - self.x1c, x[1] - self.x2c
 
         r2 = x1**2 + x2**2
 
@@ -36,7 +36,7 @@ class SimpleLimitCycle():
         sol = np.zeros((int((tN - t0) / tStep) + 1, x0.shape[0]))
 
         i = 0
-        while self.solver.status != 'finished':
+        while self.solver.status != 'finished' and i < sol.shape[0]:
             sol[i] = self.solver.y
             i += 1
             self.solver.step()
