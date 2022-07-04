@@ -44,6 +44,19 @@ tsdata1 = tf.keras.utils.timeseries_dataset_from_array(
     targets=data1[seqlen:], 
     sequence_length=seqlen
 )
+print("\n\n TSDATA1 \n\n")
+#elem = tsdata1.take(1)
+#print(list(elem.as_numpy_iterator())[0][1].shape)
+#print(np.array(elem).shape)
+
+for batch in tsdata1:
+    inputs, targets = batch
+    print(np.array(inputs).shape)
+    #print(f"Inputs: {inputs}")
+
+    print(np.array(targets).shape)
+    #print(f"Inputs: {targets}")
+
 tsdata2 = tf.keras.utils.timeseries_dataset_from_array(
     data=data2[:-1], 
     targets=data2[seqlen:], 
@@ -106,9 +119,9 @@ for i in range(SEQ_LEN, PRED_LEN):
 
 plt.plot(data1[:-1, 0], data1[:-1, 1], 'k')
 plt.plot(data2[:-1, 0], data2[:-1, 1], 'k')
-plt.plot(xshat1[:, 0], xshat1[:, 1], 'r--')
-plt.plot(xshat2[:, 0], xshat2[:, 1], 'b--')
-plt.plot(xshat4[:, 0], xshat4[:, 1], 'g--')
+#plt.plot(xshat1[:, 0], xshat1[:, 1], 'r--')
+#plt.plot(xshat2[:, 0], xshat2[:, 1], 'b--')
+#plt.plot(xshat4[:, 0], xshat4[:, 1], 'g--')
 plt.xlim(-4, 4)
 plt.ylim(-4, 4)
 plt.show()
