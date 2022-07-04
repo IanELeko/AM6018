@@ -11,12 +11,11 @@ def get_batch(dataset, sequence_length, batch_size):
     idx = np.random.choice(n - sequence_length, batch_size) # list of indices of lenght batch_size
 
     # get batches (list of np.arrays of length batch_size, and each np.array is of the shape (sequence_lenght, 2))
-    input_batch = [dataset[ind:ind+sequence_length] for ind in idx]
-    output_batch = [dataset[ind+1:ind+sequence_length+1] for ind in idx] # same as input_batch, but moved 1 to the right
+    x_batch = np.array([dataset[ind:ind+sequence_length] for ind in idx])
+    y_batch = np.array([dataset[ind+1:ind+sequence_length+1] for ind in idx]) # same as input_batch, but moved 1 to the right
 
-    # x_batch, y_batch provide the true inputs and targets for network training, shape: (batch_size, sequence_length, 2)
-    x_batch = np.reshape(input_batch, [batch_size, sequence_length, 2])
-    y_batch = np.reshape(output_batch, [batch_size, sequence_length, 2])
+    #np.testing.assert_allclose(x_batch, np.array(input_batch))
+
     return x_batch, y_batch
 
 

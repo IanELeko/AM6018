@@ -81,7 +81,7 @@ data = lc.solve_nstep(
     )
 newseq = generate_sequence(model, start_sequence=np.array([[-1., -1.]]))
 plt.plot(newseq[:, 0], newseq[:, 1], 'r', label="LSTM")
-plt.plot(data[:, 0], data[:, 1], 'k--', label="RK45")
+plt.plot(data[:, 0], data[:, 1], 'k--', label="RK45 training data")
 plt.legend(loc="upper right")
 plt.show()
 print(newseq)

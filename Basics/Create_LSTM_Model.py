@@ -77,6 +77,8 @@ if __name__ == '__main__':
         tf.keras.layers.Dense(2)
     ])
 
+    print(model.summary())
+
     # init Adam optimizer
     optimizer = tf.keras.optimizers.Adam(learning_rate=LEARNING_RATE)
 
